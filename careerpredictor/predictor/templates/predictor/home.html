@@ -1,0 +1,10 @@
+{% extends "predictor/base.html" %}
+{% block title %}Home | Career Predictor{% endblock %}
+{% block content %}
+<h1 class="text-center mb-4">Welcome to the Career Predictor</h1>
+<p class="lead text-center">Choose how you want to proceed:</p>
+<div class="d-grid gap-3 col-6 mx-auto mt-4">
+    <a href="{% url 'upload_resume' %}" class="btn btn-primary btn-lg">Upload Resume</a>
+    <a href="{% url 'take_quiz' %}" class="btn btn-success btn-lg">Take Quiz</a>
+</div>
+{% endblock %}

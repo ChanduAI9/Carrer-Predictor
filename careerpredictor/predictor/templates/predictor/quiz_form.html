@@ -1,0 +1,64 @@
+{% extends "predictor/base.html" %}
+{% block title %}Quiz Form | Career Predictor{% endblock %}
+{% block content %}
+<h2 class="text-center mb-4">Answer the Quiz to Predict Your Career</h2>
+<form id="quizForm" class="card p-4 shadow-sm">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label">Rate your coding skills (1-10)</label>
+        <input type="number" name="coding_skills_rating" class="form-control" min="1" max="10" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Rate your logical thinking (1-10)</label>
+        <input type="number" name="logical_quotient_rating" class="form-control" min="1" max="10" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Interested Area</label>
+        <select name="interested_area" class="form-select" required>
+            <option value="Technical">Technical</option>
+            <option value="Management">Management</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Preferred Work Environment</label>
+        <select name="preferred_work_environment" class="form-select" required>
+            <option value="Team">Team</option>
+            <option value="Solo">Solo</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Career Goal</label>
+        <select name="career_goal" class="form-select" required>
+            <option value="MNC Job">MNC Job</option>
+            <option value="Start-Up">Start-Up</option>
+            <option value="Research">Research</option>
+            <option value="Higher Studies">Higher Studies</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Submit Quiz</button>
+</form>
+<div class="text-center mt-3">
+    <a href="{% url 'home' %}" class="btn btn-link">← Back to Home</a>
+</div>
+<script>
+document.getElementById('quizForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const quizData = {};
+    for (const [key, value] of formData.entries()) {
+        quizData[key] = isNaN(value) ? value : Number(value);
+    }
+    const response = await fetch('/api/predict-career/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        },
+        body: JSON.stringify({ quiz_answers: quizData })
+    });
+    const result = await response.json();
+    localStorage.setItem('career_result', JSON.stringify(result));
+    window.location.href = "{% url 'career_result' %}";
+});
+</script>
+{% endblock %}

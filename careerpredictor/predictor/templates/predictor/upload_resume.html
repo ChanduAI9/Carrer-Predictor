@@ -1,0 +1,15 @@
+{% extends "predictor/base.html" %}
+{% block title %}Upload Resume | Career Predictor{% endblock %}
+{% block content %}
+<h2 class="text-center mb-4">Upload Your Resume (PDF)</h2>
+<form method="POST" enctype="multipart/form-data" class="card p-4 shadow-sm">
+    {% csrf_token %}
+    <div class="mb-3">
+        <input type="file" name="resume" class="form-control" accept=".pdf" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Predict Career</button>
+</form>
+<div class="text-center mt-3">
+    <a href="{% url 'home' %}" class="btn btn-link">← Back to Home</a>
+</div>
+{% endblock %}
