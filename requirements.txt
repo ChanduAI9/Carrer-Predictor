@@ -25,7 +25,7 @@ opt_einsum==3.4.0
 optree==0.15.0
 packaging==24.2
 pandas==2.2.3
-protobuf==5.29.4
+protobuf==5.29.5
 Pygments==2.19.1
 PyMuPDF==1.25.5
 python-dateutil==2.9.0.post0
