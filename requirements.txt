@@ -3,7 +3,7 @@ asgiref==3.8.1
 astunparse==1.6.3
 certifi==2025.1.31
 charset-normalizer==3.4.1
-Django==5.2
+Django==5.2.8
 djangorestframework==3.16.0
 flatbuffers==25.2.10
 gast==0.6.0
